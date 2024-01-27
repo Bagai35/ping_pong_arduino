@@ -75,7 +75,7 @@ void loop()
         uint8_t new_x = ball_x + ball_dir_x;
         uint8_t new_y = ball_y + ball_dir_y;
 
-        // Check if we hit the vertical walls
+        // Проверка на касание вертикальных стен
         if(new_x == 0 || new_x == 127) 
         {
             ball_dir_x = -ball_dir_x;
@@ -97,23 +97,24 @@ void loop()
             }
         }
 
-        // Check if we hit the horizontal walls.
+        // Проверка на касание горизонтальных стен
         if(new_y == 0 || new_y == 53) 
         {
             ball_dir_y = -ball_dir_y;
             new_y += ball_dir_y + ball_dir_y;
         }
 
-        // Check if we hit the CPU paddle
+        // Проверка на касание ракетки ии
         if(new_x == MCU_X && new_y >= mcu_y && new_y <= mcu_y + PADDLE_HEIGHT) 
         {
             ball_dir_x = -ball_dir_x;
             new_x += ball_dir_x + ball_dir_x;
         }
 
-        // Check if we hit the player paddle
+        // Проверка на касание ракетки игрока
         if(new_x == PLAYER_X && new_y >= player_y && new_y <= player_y + PADDLE_HEIGHT)
         {
+            
             ball_dir_x = -ball_dir_x;
             new_x += ball_dir_x + ball_dir_x;
         }
@@ -132,7 +133,7 @@ void loop()
     {
         paddle_update += PADDLE_RATE;
 
-        // настройки для псевдо ии
+        // настройки для ии
         display.drawFastVLine(MCU_X, mcu_y, PADDLE_HEIGHT, BLACK);
         const uint8_t half_paddle = PADDLE_HEIGHT >> 1;
 
